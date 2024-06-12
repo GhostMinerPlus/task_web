@@ -12,7 +12,7 @@ const MoonEditor = dynamic(
 export default function Home() {
   return (
     <div>
-      <MoonEditor />
+      <MoonEditor content='123' />
     </div>
   );
 }
