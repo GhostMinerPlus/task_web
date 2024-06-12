@@ -2,10 +2,10 @@ import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-export class MoonEditor extends React.Component {
+export class MoonEditor extends React.Component<{}, { text: string; }> {
   modules = {
     toolbar: [
-      [{ 'header': [1, 2, 3, 4, 5, 6,false] }],
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
       ['link', 'image'],
@@ -20,13 +20,9 @@ export class MoonEditor extends React.Component {
     'link', 'image'
   ];
 
-  constructor(props) {
+  constructor(props: {}) {
     super(props);
     this.state = { text: '' };
-  }
-
-  handleChange(value) {
-    this.setState({ text: value });
   }
 
   render() {
