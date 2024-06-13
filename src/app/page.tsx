@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
 import dynamic from 'next/dynamic';
 
 import { EdgeHelper } from '../edge_helper';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const helper = new EdgeHelper();
 
@@ -23,22 +23,21 @@ async function pullVersion(): Promise<string> {
   return result as string;
 }
 
-export default class Home extends React.Component<{}, {}> {
-  __isUpdated: boolean = false;
-  __content: string = '';
+export default function Home() {
+  const [isUpdated, setIsUpdated] = useState(false);
+  const [content, setContent] = useState('');
 
-  render(): React.ReactNode {
-    if (!this.__isUpdated) {
-      this.__isUpdated = true;
+  useEffect(() => {
+    if (isUpdated) {
+      setIsUpdated(true);
       pullVersion().then((version) => {
-        this.__content = version;
-        this.forceUpdate();
+        setContent(version);
       });
     }
-    return (
-      <div>
-        <MoonEditor content={this.__content} />
-      </div>
-    );
-  }
+  })
+  return (
+    <div>
+      <MoonEditor content={content} />
+    </div>
+  );
 }
