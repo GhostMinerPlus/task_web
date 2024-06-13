@@ -28,7 +28,7 @@ export default function Home() {
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    if (isUpdated) {
+    if (!isUpdated) {
       setIsUpdated(true);
       pullVersion().then((version) => {
         setContent(version);
